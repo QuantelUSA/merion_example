@@ -141,11 +141,25 @@ class MerionCLaser:
         self.state = 0
     #end def
 
+    def get_current_state(self) -> int:
+        self._qlic_comm.send_alias_command('state')
+        resp = self._qlic_comm.read_qlic_response()
+        if resp:
+            return int(resp, 16)
+        else:
+            return -1
+    #end def
+
 
     def open_connection(self) -> bool:
         return self._qlic_comm.open_connection()
     #end def
 
+
+    def set_dpw_to_max(self):
+        self._qlic_comm.send_qlic_command('propget', 'osc', 'diode', 'cpw', 'limitmax')
+        dpw_max = self._qlic_comm.read_qlic_response()
+        if dpw_max:
+            self._qlic_comm.send_qlic_command('set', 'osc', 'diode', 'cpw', dpw_max)
+    #end def
 #end class
-
-
