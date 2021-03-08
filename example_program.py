@@ -25,7 +25,7 @@ class CommunicateQlic:
 
         Args:
             ipaddr (str): ip address of the laser
-            portnum (int): [description]
+            portnum (int): socket port number
         """
         self._ip_addr = ipaddr
         self._port_num = portnum
@@ -82,7 +82,7 @@ class CommunicateQlic:
             value (str, optional): optional value. Defaults to ''.
         """
         if parameter:
-            # this will manipulate a prroperty: protget /tree/branch/function parameter
+            # this will manipulate a property: propget /tree/branch/function parameter
             cmd_str = f'{command} /{tree}/{branch}/{function} {parameter}'
         elif value:
             # set /tree/branch/function value
@@ -134,7 +134,10 @@ class CommunicateQlic:
 
 
 class MerionCLaser:
-
+    """
+    Simple class for controlling a Merion C laser over a socket
+    connection.
+    """
     def __init__(self, ipaddr: str) -> None:
         self.ip_addr = ipaddr
         self._qlic_comm = CommunicateQlic(ipaddr)
