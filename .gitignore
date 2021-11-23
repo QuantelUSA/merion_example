@@ -129,6 +129,4 @@ dmypy.json
 .pyre/
 
 # VSC workspace
-#.vscode/
-testdata/
-*.vx1
+.vscode/
